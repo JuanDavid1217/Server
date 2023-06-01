@@ -11,7 +11,7 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   }
 });
-async function run() {
+/*async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
@@ -24,7 +24,7 @@ async function run() {
   }
 }
 run().catch(console.dir);
-
+*/
 
 const app = express();
 app.use(cors());
