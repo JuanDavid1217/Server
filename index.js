@@ -1,7 +1,7 @@
 const cors = require('cors')
 const express = require('express')
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient} = require('mongodb');
 const uri = "mongodb+srv://JuanDavid1217:JuanDavid#1712@cluster0.m3ei4fv.mongodb.net/?retryWrites=true&w=majority";
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri);
@@ -24,7 +24,7 @@ const app = express();
 app.use(cors());
 app.options('*', cors());
 
-const port = 8081;
+const port = 8080;
 
 app.get('/', (req, res, next) => {
   res.send('Mongo api - CreazyDave');
