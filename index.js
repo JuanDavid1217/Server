@@ -34,11 +34,11 @@ const port = 8080;
 app.get('/', (req, res, next) => {
   res.send('Mongo api - CreazyDave');
 });
-app.get('/rectionsbypublication', (req, res, next)=>{
+app.get('/reactionsbypublication', (req, res, next)=>{
   const publication=req.query.publication
   try{
-    const db=client.db("ficicosulturismo")
-    const data=db.collection("reactions_summary").find({'publication':publication})
+    client.connect();
+    const data=client.db("fisicoculturismo").collection("reactions_summary").find({'publication':publication})
     res.send(data)
   }catch(error){
     res.send({'error':'hay un error'+error})
