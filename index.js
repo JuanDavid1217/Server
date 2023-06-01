@@ -35,7 +35,8 @@ app.get('/reactionsbypublication', (req, res, next)=>{
   try{
     client.connect();
     const data=client.db("fisicoculturismo").collection("reactions_summary").find({'_id':{'publication':publication, 'reaction':reaction}})
-    res.send('hola')
+    console.log(data)
+    res.send("hola")
   }catch(error){
     res.send({'error':'hay un error'})
   }finally{
