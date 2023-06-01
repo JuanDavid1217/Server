@@ -34,7 +34,12 @@ const port = 8080;
 app.get('/', (req, res, next) => {
   res.send('Mongo api - CreazyDave');
 });
-
+app.get('/rectionsbypublication', (req, res, next)=>{
+  const publication=req.query.publication
+  const db=client.db("ficicosulturismo")
+  const data=db.collection("reaction_summary").find({'publication':publication})
+  res.send(data)
+})
 app.listen(port,  () => 
 	console.log('listening on port ' + port
 ));
