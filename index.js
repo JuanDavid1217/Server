@@ -36,8 +36,10 @@ app.get('/', (req, res, next) => {
 });
 app.get('/rectionsbypublication', (req, res, next)=>{
   const publication=req.query.publication
-  const db=client.db("ficicosulturismo")
+  const conexion=client.connect();
+  const db=conexion.db("ficicosulturismo")
   const data=db.collection("reaction_summary").find({'publication':publication})
+  conexion.close();
   res.send(data)
 })
 app.listen(port,  () => 
