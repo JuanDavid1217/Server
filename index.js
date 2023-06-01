@@ -37,12 +37,11 @@ app.get('/', (req, res, next) => {
 app.get('/rectionsbypublication', (req, res, next)=>{
   const publication=req.query.publication
   try{
-    const conexion=client.connect();
-    const db=conexion.db("ficicosulturismo")
+    const db=client.db("ficicosulturismo")
     const data=db.collection("reactions_summary").find({'publication':publication})
     res.send(data)
-  }catch{
-    res.send({'error':'hay un error'})
+  }catch(error){
+    res.send({'error':'hay un error'+error})
   }finally{
     conexion.close();
   }
