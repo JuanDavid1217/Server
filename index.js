@@ -36,11 +36,16 @@ app.get('/', (req, res, next) => {
 });
 app.get('/rectionsbypublication', (req, res, next)=>{
   const publication=req.query.publication
-  const conexion=client.connect();
-  const db=conexion.db("ficicosulturismo")
-  const data=db.collection("reaction_summary").find({'publication':publication})
-  conexion.close();
-  res.send(data)
+  try{
+    const conexion=client.connect();
+    const db=conexion.db("ficicosulturismo")
+    const data=db.collection("reaction_summary").find({'publication':publication})
+    res.send(data)
+  }catch{
+    res.send({'error':'hay un error'})
+  }finally{
+    conexion.close();
+  }
 })
 app.listen(port,  () => 
 	console.log('listening on port ' + port
