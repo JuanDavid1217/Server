@@ -37,9 +37,7 @@ app.get('/reactionsbypublication', (req, res, next)=>{
   const publication=req.query.publication
   const reaction=req.query.reaction
   try{
-    console.log(publication)
-    console.log(reaction)
-    res.send('Hola Todo esta bien')
+    res.send({'publication':publication})
   }catch(error){
     res.send('Hola soy un error')
   }finally{
