@@ -31,12 +31,12 @@ app.get('/', (req, res, next) => {
 app.get('/reactionsbypublication', (req, res, next)=>{
   const publication=req.query.publication
   const reaction=req.query.reaction
-  console.log(publication)
   try{
+    console.log(publication)
+    console.log(reaction)
     client.connect();
-    const data=client.fisicocuturismo.reactions_sumary.find({'_id':{'publication':publication, 'reaction':reaction}})
-    console.log(data)
-    res.send("hola")
+    client.db("fisicoculturismo").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
   }catch(error){
     res.send({'error':'hay un error'})
   }finally{
