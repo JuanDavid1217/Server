@@ -30,13 +30,14 @@ app.get('/', (req, res, next) => {
 });
 app.get('/reactionsbypublication', (req, res, next)=>{
   const publication=req.query.publication
+  const reaction=req.query.reaction
   console.log(publication)
   try{
     client.connect();
-    const data=client.db("fisicoculturismo").collection("reactions_summary").find({'publication':publication['publication']})
+    const data=client.db("fisicoculturismo").collection("reactions_summary").find({'_id':{'publication':publication, 'reaction':reaction}})
     res.send(data)
   }catch(error){
-    res.send({'error':'hay un error'+error})
+    res.send({'error':'hay un error'})
   }finally{
     conexion.close();
   }
