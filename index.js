@@ -11,7 +11,7 @@ const client = new MongoClient(uri)/*, {
     deprecationErrors: true,
   }
 });*/
-async function run() {
+/*async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
@@ -24,27 +24,34 @@ async function run() {
     console.log("Ya me cerre")
     // Ensures that the client will close when you finish/error
     await client.close();
-  }*/}
-}
-run().catch(console.dir);
+  }}
+}*/
+//run().catch(console.dir);
 const app = express();
 app.use(cors());
 app.options('*', cors());
 
 const port = 8080;
 
+
 app.get('/', (req, res, next) => {
   res.send('Mongo api - CreazyDave');
 });
+
 app.get('/reactionsbypublication', (req, res)=>{
   const publication=req.query.publication
   const reaction=req.query.reaction
   try{
-    console.log(publication)
-    console.log(reaction)
-    console.log(client.db("fisicoculturismo").collection("reactions_summary").find({"_id.publication":publication}))
+    const data={"_id.publication":publication}
+    client.connect()
+    const db = client.db("fisicoculturismo")
+    const result = db.collection("reactions_summary").find({"_id.publication":`${publication}`})//.find(data)
+    console.log(JSON.stringify(result))
+    //console.log(publication)
+    //console.log(reaction)
+    //console.log(client.db("fisicoculturismo").collection("reactions_summary").find({"_id.publication":publication}))
   }catch(error){
-    res.send('Hola soy un error')
+    res.send('Hola soy un error'+error)
   }
 })
 app.listen(port,  () => 
